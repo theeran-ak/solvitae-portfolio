@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solvitae - Shaping solution for Life</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: #14B8A6;
+            --teal-dark: #0F766E;
+            --teal-light: #5EEAD4;
+            --brown: #A67C52;
+            --brown-light: #D4B896;
+            --brown-dark: #8B6F47;
+            --bg-dark: #1A1A1A;
+            --bg-light: #F8F4F0;
+            --text-dark: #2C2C2C;
+            --text-light: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            padding-left:0px;
+            padding-bottom:5px;
+            padding-top:5px;
+            padding-right:5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--teal-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            width: 150px;
+            height: 50px;
+           object-fit: cover; 
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--teal);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--teal);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #E8DFD5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--teal-dark);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--brown);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            background: var(--teal);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+        }
+
+        .cta-button:hover {
+            background: var(--teal-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(20, 184, 166, 0.4);
+        }
+
+        .turtle-illustration {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            z-index: 1;
+            
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 8%;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--teal-dark);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--brown));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 2;
+            color: var(--text-dark);
+        }
+
+        /* What We Do Section */
+        .what-we-do {
+            background: var(--bg-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--teal);
+            box-shadow: 0 20px 50px rgba(20, 184, 166, 0.15);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--teal-light), var(--teal));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            color: var(--teal-dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* Mission & Vision */
+        .mission-vision {
+            background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%);
+            color: white;
+        }
+
+        .mission-vision .section-title {
+            color: white;
+        }
+
+        .mission-vision .section-title::after {
+            background: white;
+        }
+
+        .mv-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .mv-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .mv-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+        }
+
+        .mv-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--brown-light);
+        }
+
+        .mv-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Objectives */
+        .objectives {
+            background: white;
+        }
+
+        .objectives-list {
+            max-width: 1000px;
+            margin: 3rem auto 0;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .objective-item {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--teal);
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .objective-item:hover {
+            transform: translateX(10px);
+            border-left-color: var(--brown);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .objective-number {
+            background: var(--teal);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .objective-content h4 {
+            color: var(--teal-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .objective-content p {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-light);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .team-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--teal);
+            box-shadow: 0 20px 50px rgba(20, 184, 166, 0.15);
+        }
+
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--teal-light);
+            transition: all 0.3s;
+        }
+
+        .team-card:hover .team-photo {
+            border-color: var(--teal);
+            transform: scale(1.05);
+        }
+
+        .team-card h3 {
+            color: var(--teal-dark);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .role {
+            color: var(--brown);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .team-card .email {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            word-break: break-word;
+        }
+
+        .team-card .email a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .team-card .email a:hover {
+            color: var(--teal);
+        }
+
+        .linkedin-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--teal);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(20, 184, 166, 0.3);
+        }
+
+        .linkedin-btn:hover {
+            background: var(--teal-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(20, 184, 166, 0.4);
+        }
+
+        .linkedin-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: 3rem 8%;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                padding: 0 5%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .turtle-illustration {
+                width: 300px;
+                height: 300px;
+                margin-top: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .mv-container {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="./solvitaelogo.png" alt="Solvitae Logo" class="logo-img">
+            SOLVITAE
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#what-we-do">Solutions</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#objectives">Objectives</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>SOLVITAE</h1>
+            <h2>Shaping Solution for Life</h2>
+            <p>Creating intelligent solutions that tackle real-world societal challenges through the power of hardware, software, and AI.</p>
+            <button class="cta-button">Explore Our Solutions</button>
+        </div>
+        <div class="turtle-illustration">
+            <img src="./solvitaelogo.png" alt="Solvitae Illustration" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="section-title">Who We Are</h2>
+        <div class="about-content">
+            <p>At Solvitae, we are a technology-driven startup dedicated to creating solutions that tackle real-world societal challenges. Using hardware, software and AI-powered systems, we strive to improve the quality of life, empower communities and make a meaningful impact in healthcare, personal safety, accessibility and sustainable living.</p>
+        </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section id="what-we-do" class="what-we-do">
+        <h2 class="section-title">What We Do</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🤰</div>
+                <h3>Maternal Health</h3>
+                <p>AI-powered smart wearables that monitor maternal health in real-time, ensuring safer pregnancies and better outcomes for mothers and babies.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🧠</div>
+                <h3>Parkinson's Care</h3>
+                <p>Intelligent wearable technology designed to support individuals with Parkinson's disease, improving quality of life through continuous monitoring and assistance.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💬</div>
+                <h3>Mental Wellness AI</h3>
+                <p>An empathetic AI companion chatbot that provides mental wellness support, offering accessible care and meaningful conversations when you need them most.</p>
+            </div>
+        </div>
+        <div class="about-content" style="margin-top: 3rem;">
+            <p>We develop novel technology solutions that combine intelligent hardware, AI, and software platforms to address pressing human challenges. Looking ahead, our vision is to expand into future technologies that will continue to address broader societal needs.</p>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section id="mission" class="mission-vision">
+        <h2 class="section-title">Our Purpose</h2>
+        <div class="mv-container">
+            <div class="mv-card">
+                <h3>Mission</h3>
+                <p>To leverage and deliver technology-driven solutions that address real-time human needs with practicality, scalability and empathy - bridging the gap between innovation and everyday life to create a meaningful impact.</p>
+            </div>
+            <div class="mv-card">
+                <h3>Vision</h3>
+                <p>To shape a future where technology and compassion converge, enabling accessible, intelligent and impactful solutions that improve lives, strengthen communities and tackle pressing societal challenges across healthcare, wellness, and beyond.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objectives -->
+    <section id="objectives" class="objectives">
+        <h2 class="section-title">Our Objectives</h2>
+        <div class="objectives-list">
+            <div class="objective-item">
+                <div class="objective-number">1</div>
+                <div class="objective-content">
+                    <h4>Innovate for Humanity</h4>
+                    <p>Build technologies that directly address real-world challenges and create meaningful solutions for pressing human needs.</p>
+                </div>
+            </div>
+            <div class="objective-item">
+                <div class="objective-number">2</div>
+                <div class="objective-content">
+                    <h4>Diversify Impact</h4>
+                    <p>Expand solutions across healthcare, social welfare, education and environmental sectors to maximize positive change.</p>
+                </div>
+            </div>
+            <div class="objective-item">
+                <div class="objective-number">3</div>
+                <div class="objective-content">
+                    <h4>Human-Centric Design</h4>
+                    <p>Prioritize empathy, usability and inclusivity in all our products to ensure technology serves everyone effectively.</p>
+                </div>
+            </div>
+            <div class="objective-item">
+                <div class="objective-number">4</div>
+                <div class="objective-content">
+                    <h4>Scalable Solutions</h4>
+                    <p>Develop hardware and software systems that can be widely deployed and adapted to reach communities worldwide.</p>
+                </div>
+            </div>
+            <div class="objective-item">
+                <div class="objective-number">5</div>
+                <div class="objective-content">
+                    <h4>Drive Societal Change</h4>
+                    <p>Enable communities and individuals to live safer, healthier lives with more empowered livelihoods through transformative technology.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="https://placehold.co/150x150/14B8A6/FFFFFF?text=Person+1" alt="Team Member 1" class="team-photo">
+                <h3>John Doe</h3>
+                <p class="role">Chief Executive Officer</p>
+                <p class="email"><a href="mailto:john.doe@solvitae.com">john.doe@solvitae.com</a></p>
+                <a href="https://linkedin.com/in/johndoe" target="_blank" class="linkedin-btn">
+                    <svg class="linkedin-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+            <div class="team-card">
+                <img src="https://placehold.co/150x150/A67C52/FFFFFF?text=Person+2" alt="Team Member 2" class="team-photo">
+                <h3>Jane Smith</h3>
+                <p class="role">Chief Technology Officer</p>
+                <p class="email"><a href="mailto:jane.smith@solvitae.com">jane.smith@solvitae.com</a></p>
+                <a href="https://linkedin.com/in/janesmith" target="_blank" class="linkedin-btn">
+                    <svg class="linkedin-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+            <div class="team-card">
+                <img src="https://placehold.co/150x150/5EEAD4/FFFFFF?text=Person+3" alt="Team Member 3" class="team-photo">
+                <h3>Michael Chen</h3>
+                <p class="role">Chief Operating Officer</p>
+                <p class="email"><a href="mailto:michael.chen@solvitae.com">michael.chen@solvitae.com</a></p>
+                <a href="https://linkedin.com/in/michaelchen" target="_blank" class="linkedin-btn">
+                    <svg class="linkedin-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Solvitae. Shaping Solution for Life. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .mv-card, .objective-item, .team-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
